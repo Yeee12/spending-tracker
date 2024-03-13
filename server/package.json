@@ -4,7 +4,8 @@
   "description": "expenditure",
   "main": "server.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "watch": "nodemon src/server.js"
   },
   "keywords": [
     "MERN"
