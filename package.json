@@ -7,9 +7,12 @@
     "server": "npm run watch --prefix server",
     "client": "npm run start --prefix client",
     "watch": "npm run client & npm server"
-
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express-async-handler": "^1.2.0"
+  }
 }
