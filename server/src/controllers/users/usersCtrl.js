@@ -1,4 +1,5 @@
 const expressAsyncHandler = require('express-Async-Handler');
+const genrateToken = require('../../middlewares/generateToken');
 const User = require("../../models/User");
 
 
@@ -29,4 +30,29 @@ const User = require("../../models/User");
         }
     });
 
-module.exports = {registerUser, fetchUsersCtrl};
+    //login user
+
+const loginUserCtrl = expressAsyncHandler (async(req,res) =>{
+const {email, password} = req?.body;
+
+// to verify user in db
+
+const userFound = await User.findOne({email})
+
+// check if user password match
+if(userFound && (await userFound?. isPasswordMatch(password))){
+    res.json({
+        _id: userFound?._id,
+        email: userFound?.email,
+        firstname: userFound?.firstname,
+        lastname: userFound?.lastname,
+        isAdmin: userFound?.isAdmin,
+        token: genrateToken(userFound ?. _id)
+    });
+}else{
+    res.status(401);
+    throw new Error ("invalid login attempt");
+}
+});
+
+module.exports = {registerUser, fetchUsersCtrl, loginUserCtrl};
